@@ -3,313 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ViabilityAI Engine — Premium Diagnostic Platform</title>
+    <title>Grand Imperial Barista — Luxury Cell Analysis Portal</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.0/umd/lucide.min.js"></script>
     <style>
         :root {
-            --bg-primary: #0A0A0C;
-            --bg-secondary: #121216;
-            --bg-tertiary: #1A1A22;
+            --bg-primary: #0B0B0B;
+            --bg-secondary: #141414;
             --accent-gold: #D4AF37;
-            --accent-gold-hover: #F3E5AB;
-            --text-main: #F3F4F6;
-            --text-muted: #9CA3AF;
-            --border-color: rgba(212, 175, 55, 0.15);
-            --glow-color: rgba(212, 175, 55, 0.05);
+            --accent-gold-hover: #AA8C2C;
+            --text-light: #E6E6E6;
+            --text-muted: #8A8A8A;
+            --charcoal: #1C1C1C;
+            --border-glow: rgba(212, 175, 55, 0.2);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
         }
 
         body {
             background-color: var(--bg-primary);
-            color: var(--text-main);
-            overflow-x: hidden;
-            line-height: 1.6;
+            color: var(--text-light);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Ambient Background Elements */
-        .ambient-glow {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100vw;
-            height: 600px;
-            background: radial-gradient(circle at top, rgba(212, 175, 55, 0.07) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        /* Structural Layout */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Navigation Header */
         header {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-            background: rgba(10, 10, 12, 0.8);
-            backdrop-filter: blur(12px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-        }
-
-        .nav-wrapper {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--charcoal);
+            padding: 1.5rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .logo-section {
+        .logo-area {
             display: flex;
             align-items: center;
             gap: 0.75rem;
-            font-weight: 700;
-            font-size: 1.25rem;
-            letter-spacing: -0.02em;
         }
 
         .logo-icon {
             color: var(--accent-gold);
         }
 
-        .logo-text span {
+        .logo-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .logo-title span {
             color: var(--accent-gold);
             font-weight: 300;
         }
 
-        .launch-btn {
-            background: linear-gradient(135deg, #1A1A22 0%, #0A0A0C 100%);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 500;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
             font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--accent-gold);
+        }
+
+        .btn-console {
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
             cursor: pointer;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 20px var(--glow-color);
+            transition: all 0.3s ease;
         }
 
-        .launch-btn:hover {
-            border-color: var(--accent-gold);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
-            transform: translateY(-1px);
+        .btn-console:hover {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px var(--border-glow);
         }
 
-        /* Hero Layout Showcase */
-        .hero {
-            padding: 180px 0 100px 0;
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 800px;
             text-align: center;
+            z-index: 1;
         }
 
-        .tagline-pill {
-            background: rgba(212, 175, 55, 0.06);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+        .tagline {
             color: var(--accent-gold);
-            padding: 0.5rem 1.25rem;
-            border-radius: 100px;
             font-size: 0.85rem;
             font-weight: 600;
-            letter-spacing: 0.05em;
             text-transform: uppercase;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            margin-bottom: 1.5rem;
         }
 
         h1 {
             font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.15;
-            letter-spacing: -0.03em;
+            font-weight: 300;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
             margin-bottom: 1.5rem;
-            background: linear-gradient(to bottom, #FFFFFF 40%, #A3A3A3 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
-        .hero-desc {
-            font-size: 1.2rem;
+        h1 b {
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .description {
             color: var(--text-muted);
-            max-width: 640px;
-            margin: 0 auto 3rem auto;
-            font-weight: 400;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            font-weight: 300;
         }
 
-        .hero-cta-group {
+        .action-container {
             display: flex;
             justify-content: center;
-            gap: 1.25rem;
+            gap: 1.5rem;
         }
 
-        .primary-cta {
-            background: linear-gradient(135deg, var(--accent-gold) 0%, #B8860B 100%);
-            color: #000000;
-            padding: 1rem 2.25rem;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 1rem;
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-hover) 100%);
+            color: var(--bg-primary);
+            padding: 1rem 2rem;
+            border-radius: 4px;
             text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
             display: inline-flex;
             align-items: center;
             gap: 0.75rem;
-            transition: all 0.3s ease;
-            border: none;
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .primary-cta:hover {
-            background: linear-gradient(135deg, var(--accent-gold-hover) 0%, var(--accent-gold) 100%);
+        .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.3);
-        }
-
-        /* Features Architecture Grid */
-        .features-section {
-            padding: 80px 0 140px 0;
-        }
-
-        .grid-layout {
-            display: grid;
-            grid-template-columns: repeat(3, 100fr);
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .feature-card {
-            background: var(--bg-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            padding: 2.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            border-color: var(--border-color);
-            background: var(--bg-tertiary);
-            transform: translateY(-4px);
-        }
-
-        .card-icon-frame {
-            width: 48px;
-            height: 48px;
-            background: rgba(212, 175, 55, 0.05);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-gold);
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(212, 175, 55, 0.1);
-        }
-
-        .feature-card h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            letter-spacing: -0.01em;
-        }
-
-        .feature-card p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            box-shadow: 0 6px 25px rgba(212, 175, 55, 0.3);
         }
 
         footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.03);
-            padding: 3rem 0;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid var(--charcoal);
+            padding: 2rem;
             text-align: center;
-            color: rgba(255, 255, 255, 0.2);
-            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
         }
     </style>
 </head>
 <body>
 
-    <div class="ambient-glow"></div>
-
     <header>
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo-section">
-                    <i data-lucide="scan-face" class="logo-icon" width="24" height="24"></i>
-                    <div class="logo-text">Viability<span>AI</span></div>
-                </div>
-                <a href="https://cellviability-4tdttqdbvnoneivbe7xhv5.streamlit.app" target="_blank" class="launch-btn">
-                    Launch Console
-                    <i data-lucide="arrow-up-right" width="16" height="16"></i>
+        <div class="logo-area">
+            <i data-lucide="layers" class="logo-icon" width="22" height="22"></i>
+            <div class="logo-title">Grand Imperial<span>Barista</span></div>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="nav-link active">Home</a>
+            <a href="#" class="nav-link">Analytics</a>
+            <a href="https://cellviability-4tdttqdbvnoneivbe7xhv5.streamlit.app/" target="_blank" class="btn-console">
+                Console <i data-lucide="external-link" width="14" height="14"></i>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero-container">
+            <p class="tagline">High-Precision Microscopic Processing</p>
+            <h1>Automated <b>Cell Viability</b> Analysis Engine</h1>
+            <p class="description">
+                Welcome back. Paste high-resolution digital fluorescent assays directly into our remote processing pipelines to retrieve instant metrics, live population spreads, and ready-to-print document logs.
+            </p>
+            <div class="action-container">
+                <a href="https://cellviability-4tdttqdbvnoneivbe7xhv5.streamlit.app/" target="_blank" class="btn-primary">
+                    Launch Diagnostics Engine
+                    <i data-lucide="arrow-right" width="18" height="18"></i>
                 </a>
             </div>
         </div>
-    </header>
-
-    <main class="container">
-        <section class="hero">
-            <div class="tagline-pill">
-                <i data-lucide="sparkles" width="12" height="12"></i>
-                Next-Gen Cellular Metrics
-            </div>
-            <h1>Automated Computer Vision<br>For Live/Dead Diagnostics</h1>
-            <p class="hero-desc">
-                An advanced web ecosystem designed for immediate fluorescent imagery profiling. Upload biological data arrays and parse clear metric segmentations via high-speed tensor models.
-            </p>
-            <div class="hero-cta-group">
-                <a href="https://cellviability-4tdttqdbvnoneivbe7xhv5.streamlit.app" target="_blank" class="primary-cta">
-                    Start Live Analysis
-                    <i data-lucide="binary" width="18" height="18"></i>
-                </a>
-            </div>
-        </section>
-
-        <section class="features-section">
-            <div class="grid-layout">
-                <div class="feature-card">
-                    <div class="card-icon-frame"><i data-lucide="cpu" width="22" height="22"></i></div>
-                    <h3>Computer Vision Engine</h3>
-                    <p>Utilizes optimized contour tracking filters to accurately identify overlapping cells and irregular boundary geometry layers.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="card-icon-frame"><i data-lucide="bar-chart-3" width="22" height="22"></i></div>
-                    <h3>Instant Tabular Metrics</h3>
-                    <p>Generates immediate percentage splits, viability index formulas, and total counts mapped cleanly inside an interface dashboard.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="card-icon-frame"><i data-lucide="file-text" width="22" height="22"></i></div>
-                    <h3>Automated PDF Exports</h3>
-                    <p>Compile visual diagnosis profiles and breakdown metrics straight into formal lab execution logs with single-click rendering.</p>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer>
-        <div class="container">
-            &copy; 2026 ViabilityAI Systems. All architectural engineering assets secured.
-        </div>
+        &copy; 2026 Grand Imperial Barista Ecosystem. All Rights Reserved.
     </footer>
 
     <script>
-        // Initialize dynamic luxury graphic vectors
         lucide.createIcons();
     </script>
 </body>
